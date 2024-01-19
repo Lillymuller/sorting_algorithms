@@ -13,13 +13,13 @@ int lomuto_partition(int *array, int lower, int upper, size_t size)
 {
 	int i = lower, j = upper;
 	int tmp;
-	int key = array[i];
+	int pivot = array[i];
 
 	while (i < j)
 	{
-		while (array[i] <= key)
+		while (array[i] <= pivot)
 			i++;
-		while (array[j] > key)
+		while (array[j] > pivot)
 			j--;
 		if (i < j)
 		{
