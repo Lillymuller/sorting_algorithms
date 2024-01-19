@@ -1,7 +1,7 @@
 #include "sort.h"
 
 /**
- * Lomuto_partition - partitions the given array
+ * lomuto_partition - partitions the given array
  * @array: array given to be sorted
  * @lower: start of the array
  * @upper: end of the array
@@ -9,7 +9,7 @@
  * Return: returns the upper position
  */
 
-int Lomuto_partition(int *array, int lower, int upper, size_t size)
+int lomuto_partition(int *array, int lower, int upper, size_t size)
 {
 	int i = lower, j = upper;
 	int tmp;
@@ -37,7 +37,7 @@ int Lomuto_partition(int *array, int lower, int upper, size_t size)
 }
 
 /**
- * Lomuto_sort - sorts an array of integers using quick sort algorithm
+ * lomuto_sort - sorts an array of integers using quick sort algorithm
  * @array: array given to be sorted
  * @lower: start of array
  * @upper: end of array
@@ -45,15 +45,15 @@ int Lomuto_partition(int *array, int lower, int upper, size_t size)
  * Return: void
  */
 
-void Lomuto_sort(int *array, int lower, int upper, size_t size)
+void lomuto_sort(int *array, int lower, int upper, size_t size)
 {
 	int lock;
 
 	if (lower < upper)
 	{
-		lock = Lomuto_partition(array, lower, upper, size);
-		Lomuto_sort(array, lower, lock - 1, size);
-		Lomuto_sort(array, lock + 1, upper, size);
+		lock = lomuto_partition(array, lower, upper, size);
+		lomuto_sort(array, lower, lock - 1, size);
+		lomuto_sort(array, lock + 1, upper, size);
 	}
 }
 
@@ -68,5 +68,5 @@ void quick_sort(int *array, size_t size)
 {
 	if (array == NULL || size < 2)
 		return;
-	Lomuto_sort(array, 0, size - 1, size);
+	lomuto_sort(array, 0, size - 1, size);
 }
