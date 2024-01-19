@@ -18,9 +18,14 @@ int lomuto_partition(int *array, int lower, int upper, size_t size)
 	while (i < j)
 	{
 		while (array[i] <= pivot)
+		{
 			i++;
+		}
 		while (array[j] > pivot)
+		{
 			j--;
+		}
+
 		if (i < j)
 		{
 			tmp = array[i];
@@ -33,6 +38,8 @@ int lomuto_partition(int *array, int lower, int upper, size_t size)
 	array[lower] = array[j];
 	array[j] = tmp;
 	print_array(array, size);
+
+	printf("return j=%d\n", j);
 	return (j);
 }
 
