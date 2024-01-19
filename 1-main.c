@@ -12,7 +12,7 @@
  */
 listint_t *create_listint(const int *array, size_t size)
 {
-    listint_t *list;
+listint_t *list;
     listint_t *node;
     int *tmp;
 
