@@ -17,25 +17,23 @@ void shell_sort(int *array, size_t size)
 		return;
 
 	/* loop for gap */
-	for (gap = num_elem / 3; gap >= 1; gap /= 3)
-	{
+	for (gap = 1; gap < num_elem / 3;)
 		gap = (gap * 3) + 1;
+	{
 		/* loop move from up to down wards */
-		for (up = gap; up < num_elem; up++)
+		for (; gap >= 1; gap /= 3)
 		{
 			/* loop that move from lower to upper */
-			for (low = up - gap; low >= 0; low -= gap)
+			for (low = gap; low < num_elem; low++)
 			{
-				if (array[low + gap] < array[low])
+				tmp = array[low];
+				for (up = low; up >= gap && array[up - gap] > tmp; up -= gap)
 				{
-					break;
+					array[up] = array[up - gap];
 				}
-
-					tmp = array[low + gap];
-					array[low + gap] = array[low];
-					array[low] = tmp;
-					print_array(array, size);
+				array[up] = tmp;
 			}
+			print_array(array, size);
 		}
 	}
 }
