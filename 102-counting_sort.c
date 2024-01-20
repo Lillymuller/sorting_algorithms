@@ -11,12 +11,18 @@ void counting_sort(int *array, size_t size)
 {
 	int i;
 	int *count = 0;
-	int k = 0;
+	int k;
 	int *a = 0;
 	int num_elem = size;
 
 	if (array == NULL || size < 2)
 		return;
+
+	for (k = array[0]; i < num_elem; i++)
+	{
+		if (array[i] > k)
+			k = array[i];
+	}
 
 	for (i = 0; i < num_elem; i++)
 	{
