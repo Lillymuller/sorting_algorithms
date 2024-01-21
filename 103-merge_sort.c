@@ -20,7 +20,7 @@ void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 	print_array(array + low, middle - low);
 
 	printf("[right]: ");
-	print_array(array + middle, up - middle);
+	print_array(array + middle + 1, up - middle - 1);
 
 	while (a <= middle && b <= up)
 	{
@@ -33,11 +33,11 @@ void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 		{
 			arri[last] = array[b];
 			b++;
-			last++;
 		}
+			last++;
 	}
 
-	if (a > middle)
+	if (a >  middle)
 	{
 		while (b <= up)
 		{
@@ -48,7 +48,7 @@ void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 	}
 		else
 		{
-			while (a <= middle)
+			while (a < middle)
 			{
 				arri[last] = array[a];
 				a++;
@@ -56,7 +56,7 @@ void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 			}
 		}
 
-		for (last = low; last <= up; last++)
+		for (last = low; last < up; last++)
 		{
 			array[last] = arri[last];
 		}
