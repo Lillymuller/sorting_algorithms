@@ -41,20 +41,19 @@ void max_heapify(int *array, size_t size, int i)
 
 void heap_sort(int *array, size_t size)
 {
-	int num_elem = size;
 	int tmp;
 	int i;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = (num_elem / 2) - 1; i >= 0; i--)
+	for (i = (size / 2) - 1; i >= 0; i--)
 		max_heapify(array, size, i);
 
-	for (i = num_elem - 1; i > 0; i--)
+	for (i = size - 1; i > 0; i--)
 	{
-		tmp = *array;
-		*array = array[i];
+		tmp = array[1];
+		array[1] = array[i];
 		array[i] = tmp;
 		print_array(array, size);
 		max_heapify(array, size, i);
