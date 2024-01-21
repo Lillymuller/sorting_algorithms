@@ -29,7 +29,7 @@ void max_heapify(int *array, size_t size, int i, int low)
 		array[i] = array[highest];
 		array[highest] = tmp;
 		print_array(array, size);
-		max_heapify(array, size, highest, bottom);
+		max_heapify(array, size, i, low);
 	}
 }
 
@@ -43,19 +43,20 @@ void max_heapify(int *array, size_t size, int i, int low)
 void heap_sort(int *array, size_t size)
 {
 	int tmp;
+	int num_elem = size;
 	int i;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = (size / 2) - 1; i >= 1; i--)
-		max_heapify(array, size, size, i);
+	for (i = (num_elem / 2) - 1; i >= 1; i--)
+		max_heapify(array, size, num_elem, i);
 
-	for (i = size - 1; i > 0; i--)
+	for (i = num_elem - 1; i > 0; i--)
 	{
-		tmp = *array;
-		*array = *(array + i);
-		*(array + i) = tmp;
+		tmp = array[0];
+		array[0] = array[i];
+		array[i] = tmp;
 		print_array(array, size);
 		max_heapify(array, size, i, 0);
 	}
