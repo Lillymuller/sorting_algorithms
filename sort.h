@@ -36,5 +36,6 @@ void quick_sort(int *array, size_t size);
 void shell_sort(int *array, size_t size);
 void counting_sort(int *array, size_t size);
 void merge_sort(int *array, size_t size);
+void heap_sort(int *array, size_t size);
 
 #endif
