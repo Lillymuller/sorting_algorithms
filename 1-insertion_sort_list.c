@@ -9,7 +9,6 @@ void insertion_sort_list(listint_t **list)
 {
 	listint_t *top;
 	listint_t *next_node, *tmp;
-	int flag = 0;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
@@ -18,11 +17,8 @@ void insertion_sort_list(listint_t **list)
 	while (top != NULL)
 	{
 		tmp = top;
-		while (tmp->prev != NULL)
+		while (tmp->prev != NULL && tmp->n < tmp->prev->n)
 		{
-			flag = 0;
-			if (tmp->n < tmp->prev->n)
-			{
 				if (tmp->prev->prev != NULL)
 					 /*start swapping*/
 					tmp->prev->prev->next = tmp;
@@ -35,14 +31,12 @@ void insertion_sort_list(listint_t **list)
 					tmp->next->prev = tmp->prev;
 				tmp->next = tmp->prev;
 				tmp->prev = next_node;
-				flag = 1;
+
 				if (tmp->prev == NULL)
 					*list = tmp;
 				print_list(*list);
-			}
-			if (flag == 0)
-				tmp = tmp->prev;
 		}
+		tmp = tmp->prev;
 		top = top->next;
 	}
 }
