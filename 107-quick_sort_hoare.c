@@ -42,7 +42,9 @@ int hoare_partition(int *array, int lower, int upper, size_t size)
 	return (j);
 }
 
-	
+
+
+
 
 /**
  * hoare_sort - sorts an array of integers using quick sort algorithm
