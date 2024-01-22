@@ -19,50 +19,36 @@ void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 	printf("Merging...\n[left]: ");
 	print_array(array + low, middle - low);
 
-	printf("[right]: ");
-	print_array(array + middle, up - middle);
+    printf("[right]: ");
+    print_array(array + middle, up - middle);
 
-	while (a <  middle && b < up)
-	{
-		if (array[a] <= arri[b])
-		{
-			arri[last] = array[a];
-			a++;
-		}
-		else
-		{
-			arri[last] = array[b];
-			b++;
-			last++;
-		}
-	}
+    /* First while loop: */
+    while (a < middle && b < up)
+    {
+        arri[last++] = (array[a] < array[b]) ? array[a++] : array[b++];
+    }
 
-	if (a >  middle)
-	{
-		while (b < up)
-		{
-			arri[last] = array[b];
-			b++;
-			last++;
-		}
-	}
-		else
-		{
-			while (a < middle)
-			{
-				arri[last] = array[a];
-				a++;
-				last++;
-			}
-		}
+    /*Second while loop:*/
+    while (a < middle)
+    {
+        arri[last++] = array[a++];
+    }
 
-		for (last = low; last < up; last++)
-		{
-			array[last] = arri[last];
-		}
+    /* Third while loop: */
+    while (b < up)
+    {
+        arri[last++] = array[b++];
+    }
 
-		printf("[Done]: ");
-		print_array(array + low, up - low);
+    /* Fourth while loop: */
+    a = low;
+    while (a < up)
+    {
+        array[a++] = arri[last++];
+    }
+
+    printf("[Done]: ");
+    print_array(array + low, up - low);
 }
 
 
