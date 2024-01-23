@@ -52,15 +52,15 @@ void radix_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
+	buffer = malloc(sizeof(int) * size);
+	if (buffer == NULL)
+		return;
+
 	for (highest = array[0]; j < num_elem; j++)
 	{
 		if (array[j] > highest)
 			highest = array[j];
 	}
-
-	buffer = malloc(sizeof(int) * size);
-	if (buffer == NULL)
-		return;
 
 	for (top = 1; (highest / top) > 0; top *= 10)
 	{
