@@ -13,7 +13,7 @@ void radix_count_sort(int *array, size_t size, int *buffer, int top)
 {
 	size_t num_elem = size;
 	size_t j;
-	int count[10] = {0};
+	int count[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 	for (j = 0; j < num_elem; j++)
 	{
