@@ -9,7 +9,7 @@
  * Return: void
  */
 
-void radix_count_sort(int *array, size_t size, int *buffer, int top)
+void radix_count_sort(int *array, size_t size, int top, int *buffer)
 {
 	size_t num_elem = size;
 	size_t j;
@@ -64,7 +64,7 @@ void radix_sort(int *array, size_t size)
 
 	for (top = 1; (highest / top) > 0; top *= 10)
 	{
-		radix_count_sort(array, size, buffer, top);
+		radix_count_sort(array, size, top, buffer);
 		print_array(array, size);
 	}
 	free(buffer);
