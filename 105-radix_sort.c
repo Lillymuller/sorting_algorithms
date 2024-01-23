@@ -5,28 +5,40 @@
  * @array: array to be sorted
  * @size: size of the array
  * @buffer: the location storage of the array
- * @i: the index of the array
  * @top: significant digit to sort
  * Return: void
  */
 
-void radix_count_sort(int *array, size_t size, int *buffer, int i, int top)
+void radix_count_sort(int *array, size_t size, int *buffer, int top)
 {
-	int num_elem = size;
+	size_t num_elem = size;
+	size_t j = 0;
 	int count[10] = {0};
 
-	for (i = 0; i < num_elem; i++)
-		++count[(array[i] / top) % 10];
-	for (i = 0; i < 10; i++)
-		count[i] = count[i] + count[i - 1];
-
-	for (i = num_elem - 1; i >= 0; i--)
+	while (j < num_elem)
 	{
-		buffer[--count[(array[i] / top) % 10]] = array[i];
+		++count[(array[j] / top) % 10];
+		j++;
 	}
-
-	for (i = 0; i < num_elem; i++)
-		array[i] = buffer[i];
+	j = 0;
+	while (j < 10)
+	{
+		count[j] = count[j] + count[j - 1];
+		j++;
+	}
+	j = num_elem - 1;
+	while ((int)j >= 0)
+	{
+		buffer[count[(array[j] / top) % 10] - 1] = array[j];
+		--count[(array[j] / top) % 10];
+		j--;
+	}
+	j = 0;
+	while (j < num_elem)
+	{
+		array[j] = buffer[j];
+		j++;
+	}
 }
 
 /**
@@ -40,26 +52,26 @@ void radix_sort(int *array, size_t size)
 {
 	int highest;
 	int num_elem = size;
-	int i;
+	int j;
 	int *buffer;
 	int top;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (highest = array[0]; i < num_elem; i++)
+	for (highest = array[0]; j < num_elem; j++)
 	{
-		if (array[i] > highest)
-			highest = array[i];
+		if (array[j] > highest)
+			highest = array[j];
 	}
 
-	buffer = malloc(sizeof(int) * num_elem);
+	buffer = malloc(sizeof(int) * size);
 	if (buffer == NULL)
 		return;
 
 	for (top = 1; (highest / top) > 0; top *= 10)
 	{
-		radix_count_sort(array, size, buffer, i, top);
+		radix_count_sort(array, size, buffer, top);
 		print_array(array, size);
 	}
 	free(buffer);
