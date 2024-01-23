@@ -12,32 +12,25 @@
 void radix_count_sort(int *array, size_t size, int *buffer, int top)
 {
 	size_t num_elem = size;
-	size_t j = 0;
+	size_t j;
 	int count[10] = {0};
 
-	while (j < num_elem)
+	for (j = 0; j < num_elem; j++)
 	{
 		++count[(array[j] / top) % 10];
-		j++;
 	}
-	j = 0;
-	while (j < 10)
+	for (j = 0; j < 10; j++)
 	{
 		count[j] = count[j] + count[j - 1];
-		j++;
 	}
-	j = num_elem - 1;
-	while ((int)j >= 0)
+	for (j = num_elem - 1; (int)j >= 0; j--)
 	{
 		buffer[count[(array[j] / top) % 10] - 1] = array[j];
 		--count[(array[j] / top) % 10];
-		j--;
 	}
-	j = 0;
-	while (j < num_elem)
+	for (j = 0; j < num_elem; j++)
 	{
 		array[j] = buffer[j];
-		j++;
 	}
 }
 
