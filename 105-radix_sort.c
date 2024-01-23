@@ -9,28 +9,35 @@
  * Return: void
  */
 
-void radix_count_sort(int *array, size_t size, int top, int *buffer)
+void radix_count_sort(int *array, size_t size, int *buffer, int top)
 {
 	size_t num_elem = size;
-	size_t j;
+	size_t j = 0;
 	int count[10] = {0};
 
-	for (j = 0; j < num_elem; j++)
+	while (j < num_elem)
 	{
 		++count[(array[j] / top) % 10];
+		j++;
 	}
-	for (j = 0; j < 10; j++)
+	j = 0;
+	while (j < 10)
 	{
 		count[j] = count[j] + count[j - 1];
+		j++;
 	}
-	for (j = num_elem - 1; (int)j >= 0; j--)
+	j = num_elem - 1;
+	while ((int)j >= 0)
 	{
 		buffer[count[(array[j] / top) % 10] - 1] = array[j];
 		--count[(array[j] / top) % 10];
+		j--;
 	}
-	for (j = 0; j < num_elem; j++)
+	j = 0;
+	while (j < num_elem)
 	{
 		array[j] = buffer[j];
+		j++;
 	}
 }
 
@@ -64,7 +71,7 @@ void radix_sort(int *array, size_t size)
 
 	for (top = 1; (highest / top) > 0; top *= 10)
 	{
-		radix_count_sort(array, size, top, buffer);
+		radix_count_sort(array, size, buffer, top);
 		print_array(array, size);
 	}
 	free(buffer);
