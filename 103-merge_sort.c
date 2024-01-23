@@ -7,53 +7,53 @@
 *@low: index for the lower bound
 *@middle : index for middle element
 *@up: index for upper bound
-*
 */
 
 void merge_array(int *array, int *arri, size_t low, size_t middle, size_t up)
 {
-	size_t a = low;
-	size_t b = middle + 1;
-	size_t last = low;
+	size_t a, b, last = 0;
 
 	printf("Merging...\n[left]: ");
 	print_array(array + low, middle - low);
-
 	printf("[right]: ");
 	print_array(array + middle, up - middle);
-
-	/* First while loop: */
+	a = low, b = middle;
 	while (a < middle && b < up)
 	{
-		arri[last++] = (array[a] < array[b]) ? array[a++] : array[b++];
+		if (array[a] < array[b])
+		{
+			arri[last] = array[a];
+			a++;
+		}
+		else
+		{
+			arri[last] = array[b];
+			b++;
+		}
+		last++;
 	}
-
-	/*Second while loop:*/
 	while (a < middle)
 	{
 		arri[last++] = array[a++];
+		a++;
 	}
-
-	/* Third while loop: */
 	while (b < up)
 	{
 		arri[last++] = array[b++];
+		b++;
 	}
-
-	/* Fourth while loop: */
-	a = low;
+	a = low; /* Fourth while loop: */
+	last = 0;
 	while (a < up)
 	{
 		array[a++] = arri[last++];
+		a++;
 	}
-
 	printf("[Done]: ");
 	print_array(array + low, up - low);
 }
 
-
-
-/*
+/**
 *merge_recursive - excuit the merge sorting algorithum
 *@array: array to be sorted
 *@arri: array that holds sorted array
@@ -71,7 +71,7 @@ void merge_recursive(int *array, int *arri, size_t low, size_t up)
 		middle = low + (up - low) / 2;
 
 		merge_recursive(array, arri, low, middle);
-		merge_recursive(array, arri, middle + 1, up);
+		merge_recursive(array, arri, middle, up);
 		merge_array(array, arri, low, middle, up);
 	}
 }
