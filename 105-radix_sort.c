@@ -12,9 +12,10 @@
 void radix_count_sort(int *array, size_t size, int *buffer, int top)
 {
 	size_t num_elem = size;
-	size_t j = 0;
+	size_t j;
 	int count[10] = {0};
 
+	j = 0;
 	while (j < num_elem)
 	{
 		++count[(array[j] / top) % 10];
